@@ -4,6 +4,9 @@ let vidasJugador = 3;
 let vidasEnemigo = 3;
 
 function iniciarJuego() {
+  let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque');
+  sectionSeleccionarAtaque.style.display = 'none';
+
   let botonMascotaJugador = document.getElementById("boton-mascota");
   botonMascotaJugador.addEventListener("click", seleccionarMascotaJugador);
 
@@ -15,9 +18,20 @@ function iniciarJuego() {
 
   let botonTierra = document.getElementById("boton-tierra");
   botonTierra.addEventListener("click", ataqueTierra);
+
+  let botonReiniciar = document.getElementById('boton-reiniciar');
+  botonReiniciar.addEventListener('click', reiniciarJuego);
+  let sectionReiniciar = document.getElementById('reiniciar');
+  sectionReiniciar.style.display = 'none';
 }
 
 function seleccionarMascotaJugador() {
+  let sectionSeleccionarMascota = document.getElementById('seleccionar-mascota');
+  sectionSeleccionarMascota.style.display = 'none';
+
+  let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque');
+  sectionSeleccionarAtaque.style.display = 'block';
+
   let inputHipodoge = document.getElementById("hipodoge");
   let inputCapipepo = document.getElementById("capipepo");
   let inputRatigueya = document.getElementById("ratigueya");
@@ -99,6 +113,7 @@ function combate() {
 function revisarVidas() {
   if (vidasJugador == 0) {
     crearMensajeFinal('¡Haz perdido el combate!')
+    
   } else if (vidasEnemigo == 0) {
     crearMensajeFinal('¡Haz ganado el combate!')
   }
@@ -116,6 +131,23 @@ function crearMensajeFinal(resultadoFinal) {
   let parrafo = document.createElement("p");
   parrafo.innerHTML = resultadoFinal;
   sectionMensajes.appendChild(parrafo);
+
+  let botonFuego = document.getElementById("boton-fuego");
+  botonFuego.disabled = true;
+
+  let botonAgua = document.getElementById("boton-agua");
+  botonAgua.disabled = true;
+
+  let botonTierra = document.getElementById("boton-tierra");
+  botonTierra.disabled = true;
+
+  let sectionReiniciar = document.getElementById('reiniciar');
+  sectionReiniciar.style.display = 'block';
+
+}
+
+function reiniciarJuego() {
+  location.reload();
 }
 
 function aleatorio(min, max) {
